@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Multi-Functional Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Top Controls -->
+  <div class="top-bar">
+    <select id="modeSelector" onchange="switchAppMode(this.value)">
+      <option value="calc">Standard & Sci Calculator</option>
+      <option value="currency">Currency Converter</option>
+      <option value="age">Age Calculator</option>
+      <option value="percent">Percentage Calculator</option>
+    </select>
+    <button id="themeToggle" onclick="toggleTheme()">☀️ Light Mode</button>
+  </div>
+
+  <div class="container">
+    <!-- SECTION 1: CORE CALCULATOR -->
+    <div id="calcMode" class="app-mode-panel active">
+      <div class="calculator-layout">
+        <div class="main-box">
+          <input type="text" id="display" readonly placeholder="0">
+          
+          <div class="scientific-panel">
+            <button class="sci" onclick="scientific('sin')">sin</button>
+            <button class="sci" onclick="scientific('cos')">cos</button>
+            <button class="sci" onclick="scientific('tan')">tan</button>
+            <button class="sci" onclick="scientific('sqrt')">√</button>
+            <button class="sci" onclick="scientific('log')">log</button>
+            <button class="sci" onclick="scientific('ln')">ln</button>
+            <button class="sci" onclick="appendValue('**')">xʸ</button>
+            <button class="sci" onclick="scientific('pi')">π</button>
+          </div>
+
+          <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="backspace()">⌫</button>
+            <button class="operator" onclick="appendValue('%')">%</button>
+            <button class="operator" onclick="appendValue('/')">÷</button>
+
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button class="operator" onclick="appendValue('*')">×</button>
+
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button class="operator" onclick="appendValue('-')">-</button>
+
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button class="operator" onclick="appendValue('+')">+</button>
+
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button style="grid-column: span 2;" class="operator" onclick="calculate()">=</button>
+          </div>
+        </div>
+
+        <!-- History Log Panel -->
+        <div class="history-box">
+          <h3>Calculation History</h3>
+          <div id="historyLog">
+            <p class="empty-msg">No history yet</p>
+          </div>
+          <button class="clear-history-btn" onclick="clearHistory()">Clear Log</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: CURRENCY CONVERTER -->
+    <div id="currencyMode" class="app-mode-panel">
+      <h2>Currency Converter</h2>
+      <div class="form-group">
+        <label>Amount:</label>
+        <input type="number" id="currencyAmount" value="1" oninput="convertCurrency()">
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>From:</label>
+          <select id="fromCurrency" onchange="convertCurrency()">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="INR" selected>INR (₹)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>To:</label>
+          <select id="toCurrency" onchange="convertCurrency()">
+            <option value="USD" selected>USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="INR">INR (₹)</option>
+          </select>
+        </div>
+      </div>
+      <div class="result-box">
+        <span id="currencyResult">Calculating...</span>
+      </div>
+    </div>
+
+    <!-- SECTION 3: AGE CALCULATOR -->
+    <div id="ageMode" class="app-mode-panel">
+      <h2>Age Calculator</h2>
+      <div class="form-group">
+        <label>Select Date of Birth:</label>
+        <input type="date" id="birthDate" onchange="calculateAge()">
+      </div>
+      <div class="result-box">
+        <span id="ageResult">Select your birthdate above</span>
+      </div>
+    </div>
+
+    <!-- SECTION 4: PERCENTAGE CALCULATOR -->
+    <div id="percentMode" class="app-mode-panel">
+      <h2>Percentage Calculator</h2>
+      <div class="form-group">
+        <label>What is</label>
+        <input type="number" id="pctInput1" placeholder="e.g. 10" oninput="calculatePercentage()">
+        <label>% of</label>
+        <input type="number" id="pctInput2" placeholder="e.g. 200" oninput="calculatePercentage()">
+      </div>
+      <div class="result-box">
+        <span id="percentResult">Enter numbers to compute</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
